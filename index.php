@@ -1,4 +1,5 @@
 <?php
+
 include 'templates/header.php';
 ?>
 <body>
@@ -21,3 +22,4 @@ include 'templates/header.php';
   <p>New User?  <a href="signup.php">Sign Up</a> here.</p>
 </form>
 </div>
+
