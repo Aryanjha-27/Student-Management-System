@@ -1,7 +1,8 @@
 <?php
+session_start();
 require_once('../config/db.php');
 $errors = [];
-// $result = "";
+$result = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
@@ -18,6 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Email is required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format.";
+    } else {
+        $result = mysqli_query($conn, "SELECT * FROM users WHERE Email='$email'");
+        if (mysqli_num_rows($result) > 0) {
+            $errors[] = "Email already exists.";
+        }
     }
 
     if (empty($password)) {
@@ -29,35 +35,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($password !== $c_password) {
         $errors[] = "Passwords do not match.";
     }
-
-
+    if (empty($agree)) {
+        $errors[] = "You must agree to the terms.";
+    }
 }
+if (empty($errors)) {
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    $query = "INSERT INTO users (Name, Email, Password) VALUES ('$name', '$email', '$password')";
+    if (mysqli_query($conn, $query)) {
+        header("location:../login.php?success=1");
+        session_unset();
+        exit();
+    } else {
+        $errors[] = "Failed to Register: " . mysqli_error($conn);
+    }
+}
+
+$_SESSION['$errors'] = $errors;
+header("location:../signup.php");
+exit();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Detail</title>
-</head>
-
-<body>
-    <h1>Registration Data</h1>
-    <?php if (!empty($errors)): ?>
-        <div style="color:red;">
-            <h2>Error</h2>
-
-            <ul>
-                <?php
-                foreach ($errors as $error): ?>
-                    <li>
-                        <?php echo htmlspecialchars($error); ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
-</body>
-
-</html>

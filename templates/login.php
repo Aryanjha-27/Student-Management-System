@@ -1,13 +1,32 @@
- <div class="login-box">
+<?php
+// session_start();
+$errors=$_SESSION['$errors'] ?? [];
+unset($_SESSION['$errors']);
+?>
+
+<div class="login-box">
       <div class="login-logo">
-        <a href="../index2.html"><b>Admin</b>LTE</a>
+        <a href="index.php"><b>SMS</b></a>
       </div>
       <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
           <p class="login-box-msg">Sign in to start your session</p>
+          <?php if (!empty($errors)): ?>
+        <div style="color:red;">
 
-          <form action="../index3.html" method="post">
+            <ul>
+                <?php
+                foreach ($errors as $error): ?>
+                    <li>
+                        <?php echo htmlspecialchars($error); ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+          <form action="./function/login.php" method="post">
             <div class="input-group mb-3">
               <input type="email" class="form-control" placeholder="Email" name="email" />
               <div class="input-group-text">
@@ -42,7 +61,7 @@
             <a href="#">I forgot my password</a>
           </p>
           <p class="mb-0">
-            <a href="register.php" class="text-center"> Register a new membership </a>
+            <a href="signup.php" class="text-center"> Register a new membership </a>
           </p>
         </div>
         <!-- /.login-card-body -->
