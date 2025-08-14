@@ -22,14 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($password) < 6) {
         $errors[] = "Password must be at least 6 characters.";
     }
-
+}
 
     if (empty($errors)) {
 
         $query = "SELECT name,password,email FROM users WHERE email='$email'";
         $result = mysqli_query($conn, $query);
 
-        if (mysqli_query($conn, $query)) {
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_assoc($result);
                 if (password_verify($password, $row['password'])) {
@@ -42,10 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $errors[] = "Email not Found.Please Sign up. ";
             }
-        }
-        $_SESSION['$errors'] = $errors;
+        
+       
+    }
+     $_SESSION['errors'] = $errors;
         header("location:../login.php");
         exit();
-    }
-}
+
 ?>

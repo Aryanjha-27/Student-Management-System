@@ -1,7 +1,7 @@
 <?php
 // session_start();
-$errors=$_SESSION['$errors'] ?? [];
-unset($_SESSION['$errors']);
+$errors=$_SESSION['errors'] ?? [];
+// unset($_SESSION['$errors']);
 ?>
 
 <div class="login-box">

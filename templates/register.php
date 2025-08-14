@@ -1,6 +1,6 @@
 <?php
 session_start();
-$errors = $_SESSION['$errors'] ?? [];
+$errors = $_SESSION['errors'] ?? [];
 ?>
 <div class="register-box">
   <div class="register-logo">
