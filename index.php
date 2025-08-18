@@ -1,15 +1,17 @@
-<?php include('./templates/head.php'); ?>
+<?php 
+session_start();
+// print_r($_SESSION);
+include('function/helper.php');
+if(!is_logged_in()){
+    header("location:login.php");
+    exit();
+}
+if(is_user()){
+  render_default_template('student/dashboard.php');
+    exit();
 
-<!--begin::App Wrapper-->
-<div class="app-wrapper">
-    <?php include('./templates/navbar.php'); ?>
-    <?php include('./templates/sidebar.php'); ?>
-    <?php include('./templates/dashboard.php'); ?>
-
-    <?php
-    include('./templates/footer.php');
-    ?>
-
-</div>
-<!--end::App Wrapper-->
-<?php include('./templates/foot.php'); ?>
+}elseif(is_admin()){
+    render_default_template('admin/dashboard.php');
+    exit();
+}
+// print_r(is_admin());

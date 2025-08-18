@@ -25,15 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
     if (empty($errors)) {
-
-        $query = "SELECT name,password,email FROM users WHERE email='$email'";
+        unset($_SESSION['errors']);
+        $query = "SELECT name,password,email,role FROM users WHERE email='$email'";
         $result = mysqli_query($conn, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_assoc($result);
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            
                 if (password_verify($password, $row['password'])) {
-                    $_SESSION['name'] = $row['name'];
-                    header("location:../index.php?");
+                    $_SESSION['User_name'] = $row['name'];
+                    $_SESSION['role'] = $row['role'];
+                    header("location:../index.php");
                     exit();
                 } else {
                     $errors[] = "Invalid Password";

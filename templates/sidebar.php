@@ -123,6 +123,11 @@
                           <i class="nav-icon bi bi-circle"></i>
                           <p>Register</p>
                         </a>
+                      <li class="nav-item">
+                        <a href="./function/logout.php" class="nav-link">
+                          <i class="nav-icon bi bi-box-arrow-left"></i>
+                          <p>Logout</p>
+                        </a>
                       </li>
                 </ul>
               </li>
