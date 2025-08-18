@@ -39,12 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     $errors[] = "Invalid Password";
                 }
-            } else {
+       }
+        }else {
                 $errors[] = "Email not Found.Please Sign up. ";
             }
         
        
-    }
+    
      $_SESSION['errors'] = $errors;
         header("location:../login.php");
         exit();

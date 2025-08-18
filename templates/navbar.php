@@ -51,7 +51,9 @@
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
-                <span class="d-none d-md-inline">Aryan Jha</span>
+                <span class="d-none d-md-inline"><?php 
+                echo ucfirst(isset($_SESSION['User_name'])? $_SESSION['User_name'] : 'Student'); 
+                ?></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
@@ -62,14 +64,20 @@
                     alt="User Image"
                   />
                   <p>
-                    Student
+            
+                    <?php
+                    if (isset($_SESSION['role'])) {
+                      $role= $_SESSION['role'] =='1' ? 'Student' : 'Admin';
+                    }
+                      echo $role;
+                    ?>
                   </p>
                 </li>
                 <!--end::User Image-->
                 <!--begin::Menu Footer-->
                 <li class="user-footer">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
-                  <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+                  <a href="function/logout.php" class="btn btn-default btn-flat float-end">Sign out</a>
                 </li>
                 <!--end::Menu Footer-->
               </ul>

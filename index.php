@@ -7,11 +7,17 @@ if(!is_logged_in()){
     exit();
 }
 if(is_user()){
-  render_default_template('student/dashboard.php');
-    exit();
+    $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+    if(file_exists("student/{$page}.php")){
+        render_default_template("student/{$page}.php");
+        exit();
+    } 
 
 }elseif(is_admin()){
-    render_default_template('admin/dashboard.php');
-    exit();
+     $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+    if(file_exists("admin/{$page}.php")){
+        render_default_template("admin/{$page}.php");
+        exit();
+    } 
 }
 // print_r(is_admin());
