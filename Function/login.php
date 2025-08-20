@@ -26,13 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         unset($_SESSION['errors']);
-        $query = "SELECT name,password,email,role FROM users WHERE email='$email'";
+        $query = "SELECT name,password,email,role,ID FROM users WHERE email='$email'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             
                 if (password_verify($password, $row['password'])) {
                     $_SESSION['User_name'] = $row['name'];
+                    $_SESSION['user_id'] = $row['ID'];
                     $_SESSION['role'] = $row['role'];
                     header("location:../index.php");
                     exit();

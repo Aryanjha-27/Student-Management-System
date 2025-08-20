@@ -1,33 +1,101 @@
-<form action="#" method="post">
-    <fieldset>
-        <legend>Personal Details</legend><br><br>
+<?php
+// session_start();
+$errors =$_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+?>
+<!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6">
+                <h3 class="mb-0">Personal Details</h3>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Personal Details</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-md-11">
+                <div class="card">
+    <div class="card-body register-card-body">
+      <p class="register-box-msg">Add Personal Details</p>
+      <?php if (!empty($errors)) : ?>
+        <div style="color:red;">
 
-        <label for="name">Name</label>
-        <input type="text" placeholder="Full Name" name="name">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <ul>
+            <?php
+            foreach ($errors as $error) : ?>
+              <li>
+                <?php echo htmlspecialchars($error); ?>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endif; ?>
 
-        <label for="address">Address</label>
-        <input type="text" placeholder="Address" name="address">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-        <label for="dob">Date of Birth</label>
-        <input type="date" name="dob"><br><br>
-
-        <label for="phone">Phone</label>
-        <input type="number" placeholder="Phone No." name="phone">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <label for="blood">Email</label>
-        <input type="email" placeholder="Email" name="email">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-        <label for="blood">Blood Group</label>
-        <input type="text" placeholder="O+" name="blood"><br><br>
-
-        <p>Select Gender</p>
-        <input type="radio" name="gender" value="male">
-        <label for="male">Male</label>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-        <input type="radio" name="gender" value="female">
-        <label for="female">Female</label>
-    </fieldset>
-    &nbsp;&nbsp;&nbsp;&nbsp; <button type="submit">Submit</button>
-</form>
+      <form action="./function/personal_details.php" method="post">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Address" name="address" />
+          <div class="input-group-text">
+            <span class="bi bi-geo-alt"></span>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="tel" class="form-control" placeholder="Contact no." name="contact" />
+          <div class="input-group-text">
+            <span class="bi bi-phone"></span>
+          </div>
+        </div>
+        <label for="Gender" class="form-check-label">Gender</label>&nbsp;&nbsp;
+        <div class="form-check form-check-inline mb-3">
+          <input type="radio" class="form-check-input" name="gender" value="Male" checked/>
+          <label class="form-check-label" for="gender" >Male</label>
+        </div>
+         <div class="form-check form-check-inline mb-3">
+          <input type="radio" class="form-check-input" name="gender" value="Female"/>
+          <label class="form-check-label" for="gender">Female</label>
+        </div>
+        <div class="input-group mb-3">
+          <input type="date" class="form-control" name="DOB" />
+        </div>
+          <div class="col-2">
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary btn-submit" id="btn-submit" >Add Details</button>
+            </div>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!--end::Row-->
+      </form>
+      <!-- <p class="mb-0">
+        <a href="./login.php" class="text-center"> I already have a membership </a>
+      </p> -->
+    </div>
+    <!-- /.register-card-body -->
+  </div>
+</div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
